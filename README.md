@@ -4,13 +4,13 @@ Este es un sistema de autenticación completo y seguro construido con **Node.js*
 
 ## ✨ Características
 
-- [cite_start]**Registro y Login**: Gestión de usuarios con contraseñas encriptadas mediante `bcrypt`. [cite: 25, 146, 114]
+- [cite_start]**Registro y Login**: Gestión de usuarios con contraseñas encriptadas mediante `bcrypt`. 
 - **Doble Token (JWT)**: 
-  - `AccessToken`: Token de corta duración (1 min) para autorizar peticiones. [cite: 18]
-  - `RefreshToken`: Token de mayor duración (5 min) para renovar el acceso sin re-autenticarse. [cite: 21]
-- **Seguridad**: Protección de rutas mediante Middlewares de autorización. [cite: 54]
-- **Persistencia en Memoria**: Simulación de base de datos para usuarios y almacenamiento de Refresh Tokens activos. [cite: 72, 101]
-- **Variables de Entorno**: Configuración segura de secretos mediante `.env`. [cite: 3, 183]
+  - `AccessToken`: Token de corta duración (1 min) para autorizar peticiones. 
+  - `RefreshToken`: Token de mayor duración (5 min) para renovar el acceso sin re-autenticarse. 
+- **Seguridad**: Protección de rutas mediante Middlewares de autorización. 
+- **Persistencia en Memoria**: Simulación de base de datos para usuarios y almacenamiento de Refresh Tokens activos. 
+- **Variables de Entorno**: `.env`. 
 
 ## 🛠️ Tecnologías Utilizadas
 
