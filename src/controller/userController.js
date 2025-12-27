@@ -1,7 +1,7 @@
 const usersDB = require("../data/usersDB.js")
+const refreshDB = require("../data/refreshDB.js")
 const {hashedPassword, hashCompared} = require("../utils/hash.js")
 const {accessToken, refreshToken} = require("../utils/token.js")
-const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 
 //PROFILE
@@ -44,6 +44,8 @@ const login = async (req, res)=>{
   // Refresh token
 
   const refToken = refreshToken(payload)
+
+  refreshDB.push({refreshTokendb: refToken})
   
   res.status(200).json({message: "User logged successfully✅", data: {AccessToken: accToken, RefreshToken: refToken}})
 
@@ -79,7 +81,29 @@ const register = async (req, res)=>{
 // REFRESH TOKEN 
 
 const refreToken = (req, res) => {
-  res.send("Refresh Token route OK")
+  const {refToken} = req.body
+
+  if(!refToken){
+    res.status(400).json({message: "No refresh token provided"})
+  }
+
+  const isTokenStored = refreshDB.find(rt => rt.refreshTokendb === refToken)
+
+  if(!isTokenStored){
+    res.status(403).json({message:"Invalid refresh token (not found)"})
+  }
+
+  try{
+  const decoded = jwt.verify(refToken, process.env.REFRESH_TOKEN)
+
+  const newAccessToken = accessToken({username: decoded.username})
+
+  res.status(200).json({message: "Access token refreshed successfully✅", accessToken: newAccessToken})
+  }
+  catch(err){
+    console.error(err)
+    res.status(403).json({ message: "Refresh token expired or invalid" })
+  }
 }
 
 // LOGOUT 
