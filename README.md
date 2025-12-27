@@ -4,7 +4,7 @@ Este es un sistema de autenticación completo y seguro construido con **Node.js*
 
 ## ✨ Características
 
-- [cite_start]**Registro y Login**: Gestión de usuarios con contraseñas encriptadas mediante `bcrypt`. 
+- **Registro y Login**: Gestión de usuarios con contraseñas encriptadas mediante `bcrypt`. 
 - **Doble Token (JWT)**: 
   - `AccessToken`: Token de corta duración (1 min) para autorizar peticiones. 
   - `RefreshToken`: Token de mayor duración (5 min) para renovar el acceso sin re-autenticarse. 
