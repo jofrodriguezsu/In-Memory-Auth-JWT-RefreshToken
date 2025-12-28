@@ -109,7 +109,22 @@ const refreToken = (req, res) => {
 // LOGOUT 
 
 const logout = (req, res) => {
-  res.send("Logout route OK")
+  const {refToken} = req.body
+
+  if(!refToken){
+    return res.status(400).json({message: "No token provided"})
+  }
+
+  const tokenIndex = refreshDB.findIndex(rt => rt.refreshTokendb == refToken)
+
+  if(tokenIndex === -1){
+    return res.status(403).json({message: "Refresh token not found"})
+  }
+  
+  refreshDB.splice(tokenIndex, 1)
+
+  res.status(200).json({message: "Logged out successfully✅"})
+  
 }
 
 
